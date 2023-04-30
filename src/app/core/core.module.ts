@@ -7,7 +7,7 @@ import { throwIfAlreadyLoaded } from './guard/module-import.guard';
   imports: [CommonModule],
 })
 export class CoreModule {
-  constructor(@Optional() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
-  }
+  // constructor(@Optional() parentModule: CoreModule) {
+  //   throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  // }
 }
