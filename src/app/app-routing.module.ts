@@ -8,7 +8,7 @@ const routes: Routes = [
     component: ContentLayoutComponent,
     children: [
       {
-        path: 'home',
+        path: '',
         loadChildren: () =>
           import('./modules/home/home.module').then((m) => m.HomeModule),
       },
@@ -26,6 +26,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
