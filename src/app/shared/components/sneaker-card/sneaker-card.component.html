@@ -1,1 +1,6 @@
-<p>sneaker-card works!</p>
+<div class="sneaker-card text-center">
+  <img class="img-fluid" [src]="sneakerUrl" />
+
+  <h4 class="fw-semibold text-truncate">{{ sneakerName }}</h4>
+  <h5>Price: {{ sneakerPrice | currency : "USD" : "symbol-narrow" }}</h5>
+</div>

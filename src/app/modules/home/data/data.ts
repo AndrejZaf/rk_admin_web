@@ -3,16 +3,16 @@ export var multi = [
     name: 'Nike',
     series: [
       {
-        name: '1990',
-        value: 62000000,
+        name: '27-04-2023',
+        value: 22,
       },
       {
-        name: '2010',
-        value: 73000000,
+        name: '28-04-2023',
+        value: 15,
       },
       {
-        name: '2011',
-        value: 89400000,
+        name: '29-04-2023',
+        value: 40,
       },
     ],
   },
@@ -21,16 +21,16 @@ export var multi = [
     name: 'Adidas',
     series: [
       {
-        name: '1990',
-        value: 250000000,
+        name: '27-04-2023',
+        value: 4,
       },
       {
-        name: '2010',
-        value: 309000000,
+        name: '28-04-2023',
+        value: 13,
       },
       {
-        name: '2011',
-        value: 311000000,
+        name: '29-04-2023',
+        value: 8,
       },
     ],
   },
@@ -38,12 +38,12 @@ export var multi = [
     name: 'Under Armour',
     series: [
       {
-        name: '1990',
-        value: 57000000,
+        name: '27-04-2023',
+        value: 2,
       },
       {
-        name: '2010',
-        value: 62000000,
+        name: '28-04-2023',
+        value: 5,
       },
     ],
   },
