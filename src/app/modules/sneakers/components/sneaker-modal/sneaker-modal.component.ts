@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { sizes } from '../../data/sneaker-sizes';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-sneaker-modal',
@@ -62,5 +62,9 @@ export class SneakerModalComponent {
         };
       });
     }
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.urls, event.previousIndex, event.currentIndex);
   }
 }

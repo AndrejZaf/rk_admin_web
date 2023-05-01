@@ -14,7 +14,17 @@
         (change)="onSelectFiles($event)"
         multiple
       />
-      <img *ngFor="let image of urls" [src]="image" width="200" />
+      <div
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="example-box" *ngFor="let image of urls" cdkDrag>
+          <div class="example-custom-placeholder"></div>
+          <img [src]="image" width="200" />
+        </div>
+      </div>
     </div>
     <div class="form-group mb-3">
       <label for="brand">Brand</label>

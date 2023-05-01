@@ -112,7 +112,7 @@ export class SneakersComponent {
   }
 
   onCellClicked(e: CellClickedEvent): void {
-    console.log('cellClicked', e);
+    // console.log('cellClicked', e);
   }
 
   onFirstDataRendered(): void {

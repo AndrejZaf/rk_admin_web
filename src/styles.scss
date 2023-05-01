@@ -64,3 +64,7 @@ body {
 .modal-content {
   border-radius: unset;
 }
+
+.cdk-drag-preview {
+  z-index: 9000 !important;
+}
