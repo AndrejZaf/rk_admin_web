@@ -1,0 +1,104 @@
+<div class="sneaker-form" [formGroup]="sneakerForm">
+  <div class="modal-header">
+    <h4 class="modal-title">Add/Edit Sneaker</h4>
+    <button type="button" class="btn-close" (click)="close()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group mb-3">
+      <label for="image">Upload sneaker image</label>
+      <input
+        id="image"
+        type="file"
+        formControlName="image"
+        class="form-control"
+        (change)="onSelectFiles($event)"
+        multiple
+      />
+      <img *ngFor="let image of urls" [src]="image" width="200" />
+    </div>
+    <div class="form-group mb-3">
+      <label for="brand">Brand</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        formControlName="brand"
+      >
+        <option selected>Select Brand</option>
+        <option value="1">Nike</option>
+        <option value="2">Adidas</option>
+        <option value="3">Under Armour</option>
+      </select>
+    </div>
+    <div class="form-group mb-3">
+      <label for="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        type="text"
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+    </div>
+    <div class="form-group mb-3">
+      <label for="price">Price</label>
+      <input
+        id="price"
+        type="number"
+        formControlName="price"
+        class="form-control"
+      />
+    </div>
+    <ng-container formArrayName="sizes">
+      <ng-container *ngFor="let sizeQuantity of sizes.controls; let i = index">
+        <div class="size-form-row row mb-3" [formGroupName]="i">
+          <div class="form-group col">
+            <label for="email">Size</label>
+            <input
+              id="size"
+              type="number"
+              formControlName="size"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group col pe-0">
+            <label for="email">Quantity</label>
+            <input
+              id="quantity"
+              type="number"
+              formControlName="quantity"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-1 d-flex align-items-end ps-0">
+            <button tpye="button" class="btn" (click)="deleteSize(i)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div class="text-center">
+      <button
+        type="button"
+        class="btn btn-outline-charcoal-alt"
+        (click)="addSize()"
+      >
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="close()">Close</button>
+    <button type="button" ngbAutofocus class="btn btn-outline-charcoal-alt">
+      Submit
+    </button>
+  </div>
+</div>
