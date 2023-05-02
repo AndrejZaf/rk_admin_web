@@ -9,6 +9,10 @@ import {
 } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { emails } from '../../data/emails';
+import { ButtonCellRendererComponent } from 'src/app/shared/components/button-cell-renderer/button-cell-renderer.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CustomerModalComponent } from '../../components/customer-modal/customer-modal.component';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-newsletter',
@@ -25,11 +29,29 @@ export class NewsletterComponent {
       filter: true,
       sortable: true,
     },
+    {
+      field: '',
+      cellRenderer: ButtonCellRendererComponent,
+      cellRendererParams: {
+        clicked: (field: any) => {
+          const modalRef = this.modalService.open(CustomerModalComponent, {
+            centered: true,
+            backdropClass: 'blur-backdrop',
+            size: 'lg',
+          });
+          modalRef.componentInstance.isEdit = true;
+        },
+        icon: faPen,
+      },
+      width: 10,
+      cellStyle: { textAlign: 'center' },
+      suppressMovable: true,
+    },
   ];
 
   public rowData$!: Observable<any[]>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private modalService: NgbModal) {}
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
@@ -44,7 +66,13 @@ export class NewsletterComponent {
     this.gridApi.sizeColumnsToFit();
   }
 
-  addEmail(): void {}
+  addEmail(): void {
+    this.modalService.open(CustomerModalComponent, {
+      centered: true,
+      backdropClass: 'blur-backdrop',
+      size: 'lg',
+    });
+  }
 
   downloadEmails(): void {
     const date = Date.now();
