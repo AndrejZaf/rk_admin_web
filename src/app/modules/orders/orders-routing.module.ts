@@ -5,11 +5,6 @@ import { OrdersComponent } from './containers/orders/orders.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'orders',
-    pathMatch: 'full',
-  },
-  {
-    path: 'orders',
     component: OrdersComponent,
   },
 ];

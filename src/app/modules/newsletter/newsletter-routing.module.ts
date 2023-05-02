@@ -5,11 +5,6 @@ import { NewsletterComponent } from './containers/newsletter/newsletter.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'newsletter',
-    pathMatch: 'full',
-  },
-  {
-    path: 'newsletter',
     component: NewsletterComponent,
   },
 ];

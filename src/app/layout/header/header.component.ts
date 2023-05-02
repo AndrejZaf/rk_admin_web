@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   navItems = [
-    { link: '/home', title: 'Home' },
+    { link: '/', title: 'Home' },
     { link: '/sneakers', title: 'Sneakers' },
     { link: '/orders', title: 'Orders' },
     { link: '/newsletter', title: 'Newsletter' },

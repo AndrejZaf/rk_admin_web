@@ -5,11 +5,6 @@ import { SneakersComponent } from './containers/sneakers/sneakers.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sneakers',
-    pathMatch: 'full',
-  },
-  {
-    path: 'sneakers',
     component: SneakersComponent,
   },
 ];

@@ -17,6 +17,7 @@
             type="button"
             class="btn btn-outline-charcoal text-uppercase"
             [routerLink]="item.link"
+            [routerLinkActiveOptions]="{ exact: true }"
             routerLinkActive="active">
             {{ item.title }}
           </button>
