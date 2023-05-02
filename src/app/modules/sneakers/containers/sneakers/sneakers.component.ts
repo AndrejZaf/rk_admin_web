@@ -71,6 +71,7 @@ export class SneakersComponent {
             backdropClass: 'blur-backdrop',
             size: 'lg',
           });
+          modalRef.componentInstance.isEdit = true;
         },
         icon: faPen,
       },
@@ -117,5 +118,13 @@ export class SneakersComponent {
 
   onFirstDataRendered(): void {
     this.gridApi.sizeColumnsToFit();
+  }
+
+  addSneaker(): void {
+    this.modalService.open(SneakerModalComponent, {
+      centered: true,
+      backdropClass: 'blur-backdrop',
+      size: 'lg',
+    });
   }
 }

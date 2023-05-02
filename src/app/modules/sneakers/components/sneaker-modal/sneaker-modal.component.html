@@ -1,6 +1,6 @@
 <div class="sneaker-form" [formGroup]="sneakerForm">
   <div class="modal-header">
-    <h4 class="modal-title">Add/Edit Sneaker</h4>
+    <h4 class="modal-title">{{ isEdit ? "Edit Sneaker" : "Add Sneaker" }}</h4>
     <button type="button" class="btn-close" (click)="close()"></button>
   </div>
   <div class="modal-body">
@@ -21,8 +21,7 @@
         (cdkDropListDropped)="drop($event)"
       >
         <div class="example-box" *ngFor="let image of urls" cdkDrag>
-          <div class="example-custom-placeholder"></div>
-          <img [src]="image" width="200" />
+          <img [src]="image" width="200" (dblclick)="doubleClick(image)" />
         </div>
       </div>
     </div>

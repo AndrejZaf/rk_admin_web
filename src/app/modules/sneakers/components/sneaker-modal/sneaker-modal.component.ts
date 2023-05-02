@@ -10,6 +10,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class SneakerModalComponent {
   urls: string[] = [];
+  isEdit = false;
   sneakerForm = this.formBuilder.group({
     image: ['', [Validators.required]],
     name: ['', [Validators.required]],
@@ -66,5 +67,9 @@ export class SneakerModalComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.urls, event.previousIndex, event.currentIndex);
+  }
+
+  doubleClick(image: string): void {
+    this.urls.splice(this.urls.indexOf(image), 1);
   }
 }
