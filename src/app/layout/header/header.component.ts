@@ -11,7 +11,7 @@ export class HeaderComponent {
     { link: '/home', title: 'Home' },
     { link: '/sneakers', title: 'Sneakers' },
     { link: '/orders', title: 'Orders' },
-    { link: '/newsletter-subs', title: 'Newsletter' },
+    { link: '/newsletter', title: 'Newsletter' },
   ];
   isCollapsed = true;
   toggleIcon = faBars;

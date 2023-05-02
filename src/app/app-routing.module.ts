@@ -24,6 +24,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/orders/orders.module').then((m) => m.OrdersModule),
       },
+      {
+        path: 'newsletter',
+        loadChildren: () =>
+          import('./modules/newsletter/newsletter.module').then(
+            (m) => m.NewsletterModule
+          ),
+      },
     ],
   },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },

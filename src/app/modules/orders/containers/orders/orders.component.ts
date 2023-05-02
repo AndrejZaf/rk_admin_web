@@ -54,9 +54,9 @@ export class OrdersComponent {
       singleClickEdit: true,
       cellEditorParams: {
         values: [
-          OrderStatus.DELIVERED,
-          OrderStatus.DISPATCHED,
           OrderStatus.READY_FOR_DISPATCH,
+          OrderStatus.DISPATCHED,
+          OrderStatus.DELIVERED,
         ],
       } as ISelectCellEditorParams,
       filter: true,
