@@ -9,27 +9,19 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('./modules/home/home.module').then((m) => m.HomeModule),
+        loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'sneakers',
-        loadChildren: () =>
-          import('./modules/sneakers/sneakers.module').then(
-            (m) => m.SneakersModule
-          ),
+        loadChildren: () => import('./modules/sneakers/sneakers.module').then((m) => m.SneakersModule),
       },
       {
         path: 'orders',
-        loadChildren: () =>
-          import('./modules/orders/orders.module').then((m) => m.OrdersModule),
+        loadChildren: () => import('./modules/orders/orders.module').then((m) => m.OrdersModule),
       },
       {
         path: 'newsletter',
-        loadChildren: () =>
-          import('./modules/newsletter/newsletter.module').then(
-            (m) => m.NewsletterModule
-          ),
+        loadChildren: () => import('./modules/newsletter/newsletter.module').then((m) => m.NewsletterModule),
       },
     ],
   },

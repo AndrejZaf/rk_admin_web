@@ -11,13 +11,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [SneakersComponent, SneakerModalComponent],
-  imports: [
-    CommonModule,
-    AgGridModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    SneakersRoutingModule,
-    DragDropModule,
-  ],
+  imports: [CommonModule, AgGridModule, HttpClientModule, ReactiveFormsModule, SneakersRoutingModule, DragDropModule],
 })
 export class SneakersModule {}

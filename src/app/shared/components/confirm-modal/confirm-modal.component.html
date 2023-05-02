@@ -12,11 +12,8 @@
   <button
     type="button"
     ngbAutofocus
-    [ngClass]="
-      isDangerousOperation ? 'btn btn-danger' : 'btn btn-outline-charcoal-alt'
-    "
-    (click)="confirm()"
-  >
+    [ngClass]="isDangerousOperation ? 'btn btn-danger' : 'btn btn-outline-charcoal-alt'"
+    (click)="confirm()">
     {{ confirmationText }}
   </button>
 </div>

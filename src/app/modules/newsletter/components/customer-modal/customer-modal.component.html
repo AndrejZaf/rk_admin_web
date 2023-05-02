@@ -1,23 +1,16 @@
 <div class="sneaker-form" [formGroup]="sneakerForm">
   <div class="modal-header">
-    <h4 class="modal-title">{{ isEdit ? "Edit User" : "Add User" }}</h4>
+    <h4 class="modal-title">{{ isEdit ? 'Edit User' : 'Add User' }}</h4>
     <button type="button" class="btn-close" (click)="close()"></button>
   </div>
   <div class="modal-body">
     <div class="form-group mb-3">
       <label for="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        formControlName="email"
-        class="form-control"
-      />
+      <input id="email" type="email" formControlName="email" class="form-control" />
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="close()">Close</button>
-    <button type="button" ngbAutofocus class="btn btn-outline-charcoal-alt">
-      Submit
-    </button>
+    <button type="button" ngbAutofocus class="btn btn-outline-charcoal-alt">Submit</button>
   </div>
 </div>

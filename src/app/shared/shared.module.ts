@@ -6,11 +6,7 @@ import { ButtonCellRendererComponent } from './components/button-cell-renderer/b
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [
-    SneakerCardComponent,
-    ButtonCellRendererComponent,
-    ConfirmModalComponent,
-  ],
+  declarations: [SneakerCardComponent, ButtonCellRendererComponent, ConfirmModalComponent],
   exports: [SneakerCardComponent],
   imports: [CommonModule],
 })

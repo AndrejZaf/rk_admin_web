@@ -20,10 +20,7 @@ export class SneakerModalComponent {
     sizes: this.formBuilder.array([]),
   });
 
-  constructor(
-    private activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
 
   close(): void {
     this.activeModal.close();

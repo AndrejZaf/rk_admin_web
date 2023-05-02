@@ -2,9 +2,7 @@
 <section class="mt-3">
   <div class="d-flex justify-content-between">
     <h4 class="fw-semibold text-capitalize">Available sneakers</h4>
-    <button class="btn btn-outline-charcoal" (click)="addSneaker()">
-      Add Sneaker
-    </button>
+    <button class="btn btn-outline-charcoal" (click)="addSneaker()">Add Sneaker</button>
   </div>
   <div class="sneakers-table">
     <ag-grid-angular
@@ -15,7 +13,6 @@
       [rowSelection]="'multiple'"
       [animateRows]="true"
       (gridReady)="onGridReady($event)"
-      (cellClicked)="onCellClicked($event)"
-    ></ag-grid-angular>
+      (cellClicked)="onCellClicked($event)"></ag-grid-angular>
   </div>
 </section>

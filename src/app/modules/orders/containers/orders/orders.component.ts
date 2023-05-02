@@ -1,13 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import {
-  CellClickedEvent,
-  ColDef,
-  GridApi,
-  GridReadyEvent,
-  ISelectCellEditorParams,
-} from 'ag-grid-community';
+import { CellClickedEvent, ColDef, GridApi, GridReadyEvent, ISelectCellEditorParams } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { orders } from '../../data/orders';
 import { OrderStatus } from '../../enums/order-status.enum';
@@ -55,11 +49,7 @@ export class OrdersComponent {
       editable: true,
       singleClickEdit: true,
       cellEditorParams: {
-        values: [
-          OrderStatus.READY_FOR_DISPATCH,
-          OrderStatus.DISPATCHED,
-          OrderStatus.DELIVERED,
-        ],
+        values: [OrderStatus.READY_FOR_DISPATCH, OrderStatus.DISPATCHED, OrderStatus.DELIVERED],
       } as ISelectCellEditorParams,
       filter: true,
       sortable: true,

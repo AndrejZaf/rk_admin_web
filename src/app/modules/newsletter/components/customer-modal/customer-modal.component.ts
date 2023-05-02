@@ -15,10 +15,8 @@ export class CustomerModalComponent implements OnInit {
     email: ['', [Validators.required]],
   });
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private activeModal: NgbActiveModal
-  ) {}
+  constructor(private formBuilder: FormBuilder, private activeModal: NgbActiveModal) {}
+
   ngOnInit(): void {
     this.sneakerForm.get('email')?.setValue(this.isEdit ? this.email : '');
   }

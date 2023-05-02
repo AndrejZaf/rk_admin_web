@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import {
-  CellClickedEvent,
-  ColDef,
-  GridApi,
-  GridReadyEvent,
-} from 'ag-grid-community';
+import { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { sneakersData } from '../../data/sneakers-data';
 import { ButtonCellRendererComponent } from './../../../../shared/components/button-cell-renderer/button-cell-renderer.component';
@@ -54,8 +49,7 @@ export class SneakersComponent {
             backdropClass: 'blur-backdrop',
           });
           modalRef.componentInstance.title = 'Premium Sneaker';
-          modalRef.componentInstance.body =
-            'Are you sure you want to make this sneaker premium?';
+          modalRef.componentInstance.body = 'Are you sure you want to make this sneaker premium?';
           modalRef.componentInstance.confirmationText = 'Confirm';
           modalRef.componentInstance.cancelationText = 'Cancel';
         },
@@ -93,8 +87,7 @@ export class SneakersComponent {
             backdropClass: 'blur-backdrop',
           });
           modalRef.componentInstance.title = 'Delete sneaker';
-          modalRef.componentInstance.body =
-            'Are you sure you want to delete this sneaker?';
+          modalRef.componentInstance.body = 'Are you sure you want to delete this sneaker?';
           modalRef.componentInstance.confirmationText = 'Confirm';
           modalRef.componentInstance.cancelationText = 'Cancel';
           modalRef.componentInstance.isDangerousOperation = true;

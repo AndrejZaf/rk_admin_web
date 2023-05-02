@@ -10,12 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [NewsletterComponent, CustomerModalComponent],
-  imports: [
-    CommonModule,
-    AgGridModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    NewsletterRoutingModule,
-  ],
+  imports: [CommonModule, AgGridModule, HttpClientModule, ReactiveFormsModule, NewsletterRoutingModule],
 })
 export class NewsletterModule {}
