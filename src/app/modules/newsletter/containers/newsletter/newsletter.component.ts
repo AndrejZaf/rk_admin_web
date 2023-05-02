@@ -12,7 +12,6 @@ import { emails } from '../../data/emails';
 import { ButtonCellRendererComponent } from 'src/app/shared/components/button-cell-renderer/button-cell-renderer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerModalComponent } from '../../components/customer-modal/customer-modal.component';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-newsletter',
@@ -41,7 +40,7 @@ export class NewsletterComponent {
           });
           modalRef.componentInstance.isEdit = true;
         },
-        icon: faPen,
+        icon: 'bi bi-pencil',
       },
       width: 10,
       cellStyle: { textAlign: 'center' },

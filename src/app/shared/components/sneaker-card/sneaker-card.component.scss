@@ -10,6 +10,20 @@
   transition: all 0.2s linear;
 }
 
+@media (max-width: 575.98px) {
+  .sneaker-card {
+    height: 310px;
+    width: 310px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .sneaker-card {
+    height: 310px;
+    width: 310px;
+  }
+}
+
 .sneaker-card:hover {
   border-width: 3px;
   border-style: solid;

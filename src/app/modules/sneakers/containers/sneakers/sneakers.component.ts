@@ -5,7 +5,6 @@ import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { sneakersData } from '../../data/sneakers-data';
 import { ButtonCellRendererComponent } from './../../../../shared/components/button-cell-renderer/button-cell-renderer.component';
-import { faPen, faStar, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { SneakerModalComponent } from '../../components/sneaker-modal/sneaker-modal.component';
@@ -55,7 +54,7 @@ export class SneakersComponent {
           modalRef.componentInstance.confirmationText = 'Confirm';
           modalRef.componentInstance.cancelationText = 'Cancel';
         },
-        icon: faStar,
+        icon: 'bi bi-star',
       },
       width: 20,
       cellStyle: { textAlign: 'center' },
@@ -73,7 +72,7 @@ export class SneakersComponent {
           });
           modalRef.componentInstance.isEdit = true;
         },
-        icon: faPen,
+        icon: 'bi bi-pencil',
       },
       width: 20,
       cellStyle: { textAlign: 'center' },
@@ -95,7 +94,7 @@ export class SneakersComponent {
           modalRef.componentInstance.cancelationText = 'Cancel';
           modalRef.componentInstance.isDangerousOperation = true;
         },
-        icon: faTrash,
+        icon: 'bi bi-trash',
       },
       width: 20,
       cellStyle: { textAlign: 'center' },

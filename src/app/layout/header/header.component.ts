@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { faBars, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +13,4 @@ export class HeaderComponent {
     { link: '/newsletter', title: 'Newsletter' },
   ];
   isCollapsed = true;
-  toggleIcon = faBars;
-  shoppingIcon = faShoppingCart;
 }
