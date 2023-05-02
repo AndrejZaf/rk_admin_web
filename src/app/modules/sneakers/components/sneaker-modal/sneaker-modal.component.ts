@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -56,9 +56,8 @@ export class SneakerModalComponent {
     if (event.target.files && event.target.files[0]) {
       Object.keys(event.target.files).forEach((file: any) => {
         var reader = new FileReader();
-        reader.readAsDataURL(event.target.files[file]); // read file as data url
+        reader.readAsDataURL(event.target.files[file]);
         reader.onload = (event) => {
-          // called once readAsDataURL is completed
           this.urls.push(event.target!.result!.toString());
         };
       });

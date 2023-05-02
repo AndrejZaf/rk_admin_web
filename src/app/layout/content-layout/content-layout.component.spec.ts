@@ -8,9 +8,8 @@ describe('ContentLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContentLayoutComponent ]
-    })
-    .compileComponents();
+      declarations: [ContentLayoutComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ContentLayoutComponent);
     component = fixture.componentInstance;

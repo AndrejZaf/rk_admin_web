@@ -8,9 +8,8 @@ describe('ButtonCellRendererComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonCellRendererComponent ]
-    })
-    .compileComponents();
+      declarations: [ButtonCellRendererComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonCellRendererComponent);
     component = fixture.componentInstance;

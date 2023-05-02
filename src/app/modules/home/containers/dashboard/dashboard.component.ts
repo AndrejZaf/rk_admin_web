@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { multi } from '../data/data';
+import { multi } from '../../data/data';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
@@ -10,7 +10,6 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
 export class DashboardComponent {
   multi: any[] = [];
   view: Number[] = [700, 300];
-  // options
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;

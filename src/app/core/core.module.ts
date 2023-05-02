@@ -1,4 +1,4 @@
-import { NgModule, Optional } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { throwIfAlreadyLoaded } from './guard/module-import.guard';
 
@@ -7,7 +7,7 @@ import { throwIfAlreadyLoaded } from './guard/module-import.guard';
   imports: [CommonModule],
 })
 export class CoreModule {
-  // constructor(@Optional() parentModule: CoreModule) {
-  //   throwIfAlreadyLoaded(parentModule, 'CoreModule');
-  // }
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  }
 }
