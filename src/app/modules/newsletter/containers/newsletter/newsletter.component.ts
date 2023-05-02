@@ -58,15 +58,12 @@ export class NewsletterComponent {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
     this.rowData$ = of(emails);
   }
 
   onCellClicked(e: CellClickedEvent): void {
     // console.log('cellClicked', e);
-  }
-
-  onFirstDataRendered(): void {
-    this.gridApi.sizeColumnsToFit();
   }
 
   addEmail(): void {

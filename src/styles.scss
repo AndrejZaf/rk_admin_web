@@ -68,3 +68,7 @@ body {
 .cdk-drag-preview {
   z-index: 9000 !important;
 }
+
+.ag-layout-normal > .ag-body-viewport.ag-layout-normal {
+  overflow-y: overlay;
+}

@@ -28,7 +28,7 @@ export class SneakersComponent {
       field: 'brand',
       filter: true,
       sortable: true,
-      width: 100,
+      width: 80,
     },
     { headerName: 'Name', field: 'name', filter: true, sortable: true },
     {
@@ -42,7 +42,7 @@ export class SneakersComponent {
       field: 'price',
       filter: true,
       sortable: true,
-      width: 100,
+      width: 80,
     },
     {
       field: '',
@@ -61,7 +61,7 @@ export class SneakersComponent {
         },
         icon: 'bi bi-star',
       },
-      width: 20,
+      width: 10,
       cellStyle: { textAlign: 'center' },
       suppressMovable: true,
     },
@@ -79,7 +79,7 @@ export class SneakersComponent {
         },
         icon: 'bi bi-pencil',
       },
-      width: 20,
+      width: 10,
       cellStyle: { textAlign: 'center' },
       suppressMovable: true,
     },
@@ -101,7 +101,7 @@ export class SneakersComponent {
         },
         icon: 'bi bi-trash',
       },
-      width: 20,
+      width: 10,
       cellStyle: { textAlign: 'center' },
       suppressMovable: true,
     },
@@ -113,15 +113,12 @@ export class SneakersComponent {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
     this.rowData$ = of(sneakersData);
   }
 
   onCellClicked(e: CellClickedEvent): void {
     // console.log('cellClicked', e);
-  }
-
-  onFirstDataRendered(): void {
-    this.gridApi.sizeColumnsToFit();
   }
 
   addSneaker(): void {

@@ -73,14 +73,11 @@ export class OrdersComponent {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
     this.rowData$ = of(orders);
   }
 
   onCellClicked(e: CellClickedEvent): void {
     // console.log('cellClicked', e);
-  }
-
-  onFirstDataRendered(): void {
-    this.gridApi.sizeColumnsToFit();
   }
 }
