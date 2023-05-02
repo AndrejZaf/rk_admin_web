@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
+import {
+  CellClickedEvent,
+  ColDef,
+  GridApi,
+  GridReadyEvent,
+} from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { sneakersData } from '../../data/sneakers-data';
 import { ButtonCellRendererComponent } from './../../../../shared/components/button-cell-renderer/button-cell-renderer.component';
@@ -16,7 +21,7 @@ import { SneakerModalComponent } from '../../components/sneaker-modal/sneaker-mo
 })
 export class SneakersComponent {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
-  private gridApi: any;
+  private gridApi!: GridApi;
   public columnDefs: ColDef[] = [
     {
       headerName: 'Brand',
@@ -43,7 +48,7 @@ export class SneakersComponent {
       field: '',
       cellRenderer: ButtonCellRendererComponent,
       cellRendererParams: {
-        clicked: (field: any) => {
+        clicked: (field: CellClickedEvent) => {
           const modalRef = this.modalService.open(ConfirmModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',
@@ -64,7 +69,7 @@ export class SneakersComponent {
       field: '',
       cellRenderer: ButtonCellRendererComponent,
       cellRendererParams: {
-        clicked: (field: any) => {
+        clicked: (field: CellClickedEvent) => {
           const modalRef = this.modalService.open(SneakerModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',
@@ -82,7 +87,7 @@ export class SneakersComponent {
       field: '',
       cellRenderer: ButtonCellRendererComponent,
       cellRendererParams: {
-        clicked: (field: any) => {
+        clicked: (field: CellClickedEvent) => {
           const modalRef = this.modalService.open(ConfirmModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',

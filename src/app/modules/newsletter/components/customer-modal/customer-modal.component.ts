@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,8 +7,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './customer-modal.component.html',
   styleUrls: ['./customer-modal.component.scss'],
 })
-export class CustomerModalComponent {
-  isEdit = false;
+export class CustomerModalComponent implements OnInit {
+  isEdit: boolean = false;
+  email: string = '';
+
   sneakerForm = this.formBuilder.group({
     email: ['', [Validators.required]],
   });
@@ -17,6 +19,9 @@ export class CustomerModalComponent {
     private formBuilder: FormBuilder,
     private activeModal: NgbActiveModal
   ) {}
+  ngOnInit(): void {
+    this.sneakerForm.get('email')?.setValue(this.isEdit ? this.email : '');
+  }
 
   close(): void {
     this.activeModal.close();

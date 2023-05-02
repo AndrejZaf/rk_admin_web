@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { multi } from '../../data/data';
+import { salesData } from '../../data/data';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
+import { SalesModel } from '../../models/sales.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,7 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  multi: any[] = [];
+  salesData: SalesModel[] = [];
   view: Number[] = [700, 300];
   legend: boolean = true;
   showLabels: boolean = true;
@@ -29,19 +30,7 @@ export class DashboardComponent {
   };
 
   constructor() {
-    Object.assign(this, { multi });
-  }
-
-  onSelect(data: any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
-
-  onActivate(data: any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data: any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    Object.assign(this, { salesData });
   }
 
   mostWantedSneaker = {

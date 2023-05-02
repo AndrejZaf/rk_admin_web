@@ -1,4 +1,6 @@
-export var multi = [
+import { SalesModel } from '../models/sales.model';
+
+export var salesData: SalesModel[] = [
   {
     name: 'Nike',
     series: [
@@ -16,7 +18,6 @@ export var multi = [
       },
     ],
   },
-
   {
     name: 'Adidas',
     series: [

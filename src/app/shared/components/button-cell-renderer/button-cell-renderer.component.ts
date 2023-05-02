@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
   selector: 'app-button-cell-renderer',
@@ -9,7 +10,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 export class ButtonCellRendererComponent implements ICellRendererAngularComp {
   params: any;
 
-  agInit(params: any): void {
+  agInit(params: ICellRendererParams): void {
     this.params = params;
   }
 
@@ -17,7 +18,7 @@ export class ButtonCellRendererComponent implements ICellRendererAngularComp {
     this.params.clicked(this.params.value);
   }
 
-  refresh(params: any): boolean {
+  refresh(params: ICellRendererParams): boolean {
     return true;
   }
 }

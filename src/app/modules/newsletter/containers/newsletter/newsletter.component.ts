@@ -12,6 +12,7 @@ import { emails } from '../../data/emails';
 import { ButtonCellRendererComponent } from 'src/app/shared/components/button-cell-renderer/button-cell-renderer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerModalComponent } from '../../components/customer-modal/customer-modal.component';
+import { Email } from '../../models/email.model';
 
 @Component({
   selector: 'app-newsletter',
@@ -31,14 +32,17 @@ export class NewsletterComponent {
     {
       field: '',
       cellRenderer: ButtonCellRendererComponent,
+      valueGetter: (params) => params.data.email,
       cellRendererParams: {
-        clicked: (field: any) => {
+        clicked: (field: CellClickedEvent) => {
+          console.log(field);
           const modalRef = this.modalService.open(CustomerModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',
             size: 'lg',
           });
           modalRef.componentInstance.isEdit = true;
+          modalRef.componentInstance.email = field;
         },
         icon: 'bi bi-pencil',
       },
@@ -48,7 +52,7 @@ export class NewsletterComponent {
     },
   ];
 
-  public rowData$!: Observable<any[]>;
+  public rowData$!: Observable<Email[]>;
 
   constructor(private http: HttpClient, private modalService: NgbModal) {}
 

@@ -4,12 +4,14 @@ import { AgGridAngular } from 'ag-grid-angular';
 import {
   CellClickedEvent,
   ColDef,
+  GridApi,
   GridReadyEvent,
   ISelectCellEditorParams,
 } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { orders } from '../../data/orders';
 import { OrderStatus } from '../../enums/order-status.enum';
+import { Order } from '../../models/order.model';
 
 @Component({
   selector: 'app-orders',
@@ -18,7 +20,7 @@ import { OrderStatus } from '../../enums/order-status.enum';
 })
 export class OrdersComponent {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
-  private gridApi: any;
+  private gridApi!: GridApi;
   public columnDefs: ColDef[] = [
     {
       headerName: 'Order ID',
@@ -65,7 +67,7 @@ export class OrdersComponent {
     },
   ];
 
-  public rowData$!: Observable<any[]>;
+  public rowData$!: Observable<Order[]>;
 
   constructor(private http: HttpClient) {}
 

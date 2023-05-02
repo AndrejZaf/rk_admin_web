@@ -1,6 +1,7 @@
 import { OrderStatus } from '../enums/order-status.enum';
+import { Order } from '../models/order.model';
 
-export const orders = [
+export const orders: Order[] = [
   {
     orderId: '#28374671',
     orderPrice: 420,
