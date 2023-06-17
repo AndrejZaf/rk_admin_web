@@ -1,8 +1,10 @@
+import { SneakerSize } from './sneaker-size.model';
+
 export interface Sneaker {
-  id: number;
   brand: string;
   name: string;
   description: string;
   price: number;
-  isPremium: boolean;
+  sizes: SneakerSize[];
+  images: string[];
 }

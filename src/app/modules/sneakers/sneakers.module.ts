@@ -8,9 +8,11 @@ import { AgGridModule } from 'ag-grid-angular';
 import { SneakerModalComponent } from './components/sneaker-modal/sneaker-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SneakerService } from './services/sneaker.service';
 
 @NgModule({
   declarations: [SneakersComponent, SneakerModalComponent],
   imports: [CommonModule, AgGridModule, HttpClientModule, ReactiveFormsModule, SneakersRoutingModule, DragDropModule],
+  providers: [SneakerService],
 })
 export class SneakersModule {}

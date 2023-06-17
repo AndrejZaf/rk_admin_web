@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Sneaker } from '../../models/sneaker.model';
+import { SneakerSize } from './../../models/sneaker-size.model';
+import { SneakerService } from '../../services/sneaker.service';
 
 @Component({
   selector: 'app-sneaker-modal',
@@ -20,7 +23,11 @@ export class SneakerModalComponent {
     sizes: this.formBuilder.array([]),
   });
 
-  constructor(private activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
+  constructor(
+    private activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder,
+    private sneakerService: SneakerService
+  ) {}
 
   close(): void {
     this.activeModal.close();
@@ -30,7 +37,24 @@ export class SneakerModalComponent {
     if (this.sneakerForm.invalid) {
       return;
     }
-    console.info('Form Valid!');
+
+    const sizes = this.sizes.controls.map((control) => {
+      const size = control.get('size')?.value;
+      const quantity = control.get('quantity')?.value;
+      const sneakerSize = { size, quantity } as SneakerSize;
+      return sneakerSize;
+    });
+
+    const sneakerDTO: Sneaker = {
+      price: +this.sneakerForm.controls.price.value!,
+      brand: this.sneakerForm.controls.brand.value!,
+      description: this.sneakerForm.controls.description.value!,
+      name: this.sneakerForm.controls.name.value!,
+      sizes: sizes,
+      images: this.urls,
+    };
+    console.log(sneakerDTO);
+    this.sneakerService.addSneaker(sneakerDTO);
   }
 
   get sizes() {
@@ -39,7 +63,7 @@ export class SneakerModalComponent {
 
   addSize() {
     const sizeQuantity = this.formBuilder.group({
-      size: ['', [Validators.required, Validators.min(36), Validators.max(47)]],
+      size: ['', [Validators.required]],
       quantity: ['', [Validators.required]],
     });
     this.sizes.push(sizeQuantity);
