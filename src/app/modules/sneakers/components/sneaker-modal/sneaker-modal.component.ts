@@ -48,11 +48,12 @@ export class SneakerModalComponent {
 
     const sneakerDTO: Sneaker = {
       price: +this.sneakerForm.controls.price.value!,
-      brand: this.sneakerForm.controls.brand.value!,
+      brand: +this.sneakerForm.controls.brand.value!,
       description: this.sneakerForm.controls.description.value!,
       name: this.sneakerForm.controls.name.value!,
       sizes: sizes,
       images: this.urls,
+      gender: +this.sneakerForm.controls.gender.value!,
     };
     console.log(sneakerDTO);
     this.sneakerService.addSneaker(sneakerDTO);
