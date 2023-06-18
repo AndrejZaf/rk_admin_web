@@ -21,6 +21,7 @@ export class SneakerModalComponent {
     price: ['', [Validators.required]],
     brand: ['', [Validators.required]],
     sizes: this.formBuilder.array([]),
+    gender: ['', [Validators.required]],
   });
 
   constructor(

@@ -12,6 +12,13 @@ interface ISneakerService {
 export class SneakerService implements ISneakerService {
   constructor(private http: HttpClient) {}
   addSneaker(sneakerDTO: Sneaker): void {
-    this.http.post('http://localhost:8080/api/sneaker', JSON.stringify(sneakerDTO)).subscribe((e) => console.log(e));
+    this.http
+      .post('http://localhost:8080/api/admin/sneaker', JSON.stringify(sneakerDTO), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      })
+      .subscribe((e) => console.log(e));
   }
 }
