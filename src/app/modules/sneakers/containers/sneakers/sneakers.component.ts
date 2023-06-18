@@ -1,15 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { ButtonCellRendererComponent } from './../../../../shared/components/button-cell-renderer/button-cell-renderer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { SneakerModalComponent } from '../../components/sneaker-modal/sneaker-modal.component';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import * as sneakersActions from '../../store/sneakers.actions';
-import { SneakersState, sneakersState } from '../../store/sneakers.store';
+import { SneakersState } from '../../store/sneakers.store';
 import { SneakerDTO } from '../../dto/sneaker.dto';
 
 @Component({
@@ -63,7 +62,8 @@ export class SneakersComponent implements OnInit {
       suppressMovable: true,
     },
     {
-      field: '',
+      field: 'id',
+      headerName: '',
       cellRenderer: ButtonCellRendererComponent,
       cellRendererParams: {
         clicked: (field: CellClickedEvent) => {
@@ -72,6 +72,10 @@ export class SneakersComponent implements OnInit {
             backdropClass: 'blur-backdrop',
             size: 'lg',
           });
+
+          this.sneakers$
+            .pipe(map((sneakers) => sneakers.find((sneaker) => sneaker.id === +field)))
+            .subscribe((sneaker) => (modalRef.componentInstance.sneaker = sneaker));
           modalRef.componentInstance.isEdit = true;
         },
         icon: 'bi bi-pencil',

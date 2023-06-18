@@ -32,6 +32,7 @@ export class LoadBrandsFail {
 
 export class AddSneaker {
   static readonly type = '[Sneakers] Add Sneaker';
+  constructor(readonly payload: SneakerDTO) {}
 }
 
 export class AddSneakerSuccess {
@@ -46,6 +47,7 @@ export class AddSneakerFail {
 
 export class EditSneaker {
   static readonly type = '[Sneakers] Edit Sneaker';
+  constructor(readonly payload: SneakerDTO) {}
 }
 
 export class EditSneakerSuccess {

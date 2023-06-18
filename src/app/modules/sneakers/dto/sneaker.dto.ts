@@ -2,7 +2,7 @@ import { SneakerSizeDTO } from './sneaker-size.dto';
 
 export interface SneakerDTO {
   id?: number;
-  brand: number;
+  brandId: number;
   name: string;
   description: string;
   price: number;

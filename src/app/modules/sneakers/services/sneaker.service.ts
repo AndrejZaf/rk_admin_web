@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 interface ISneakerService {
   addSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO>;
+  editSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO>;
   loadBrands(): Observable<BrandDTO[]>;
   loadSneakers(): Observable<SneakerDTO[]>;
 }
@@ -22,6 +23,15 @@ export class SneakerService implements ISneakerService {
 
   addSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO> {
     return this.http.post<SneakerDTO>('http://localhost:8080/api/admin/sneaker', JSON.stringify(sneakerDTO), {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+  }
+
+  editSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO> {
+    return this.http.put<SneakerDTO>('http://localhost:8080/api/admin/sneaker', JSON.stringify(sneakerDTO), {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
