@@ -22,17 +22,13 @@
     <div class="form-group mb-3">
       <label for="brand">Brand</label>
       <select class="form-select" aria-label="Default select example" formControlName="brand">
-        <option selected>Select Brand</option>
-        <option value="1">Nike</option>
-        <option value="2">Adidas</option>
-        <option value="3">Under Armour</option>
+        <option *ngFor="let brand of brands$ | async" value="brand.id">{{ brand.name }}</option>
       </select>
     </div>
     <div class="form-group mb-3">
       <label for="gender">Gender</label>
       <select class="form-select" aria-label="Default select example" formControlName="gender">
-        <option selected>Select Gender</option>
-        <option value="1">Male</option>
+        <option selected value="1">Male</option>
         <option value="2">Female</option>
       </select>
     </div>

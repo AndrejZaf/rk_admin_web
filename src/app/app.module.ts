@@ -11,6 +11,7 @@ import { ContentLayoutComponent } from './layout/content-layout/content-layout.c
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, ContentLayoutComponent],
@@ -22,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     AppRoutingModule,
     NgbModule,
+    NgxsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,20 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
-import { sneakersData } from '../../data/sneakers-data';
 import { ButtonCellRendererComponent } from './../../../../shared/components/button-cell-renderer/button-cell-renderer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { SneakerModalComponent } from '../../components/sneaker-modal/sneaker-modal.component';
+import { Select, Store } from '@ngxs/store';
+import * as sneakersActions from '../../store/sneakers.actions';
+import { SneakersState, sneakersState } from '../../store/sneakers.store';
+import { SneakerDTO } from '../../dto/sneaker.dto';
 
 @Component({
   selector: 'app-sneakers',
   templateUrl: './sneakers.component.html',
   styleUrls: ['./sneakers.component.scss'],
 })
-export class SneakersComponent {
+export class SneakersComponent implements OnInit {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
   private gridApi!: GridApi;
   public columnDefs: ColDef[] = [
@@ -100,14 +103,28 @@ export class SneakersComponent {
     },
   ];
 
-  public rowData$!: Observable<any[]>;
+  public sneakers$: Observable<SneakerDTO[]>;
 
-  constructor(private http: HttpClient, private modalService: NgbModal) {}
+  constructor(private store: Store, private modalService: NgbModal) {
+    this.sneakers$ = this.store.select(SneakersState.sneakers);
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.loadBrands();
+    this.loadSneakers();
+  }
+
+  private loadBrands(): void {
+    this.store.dispatch(new sneakersActions.LoadBrands());
+  }
+
+  private loadSneakers(): void {
+    this.store.dispatch(new sneakersActions.LoadSneakers());
+  }
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
-    this.rowData$ = of(sneakersData);
   }
 
   onCellClicked(e: CellClickedEvent): void {

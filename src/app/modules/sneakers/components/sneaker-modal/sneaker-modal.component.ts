@@ -2,9 +2,14 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Sneaker } from '../../models/sneaker.model';
-import { SneakerSize } from './../../models/sneaker-size.model';
+import { SneakerSizeDTO } from '../../dto/sneaker-size.dto';
 import { SneakerService } from '../../services/sneaker.service';
+import { SneakerDTO } from '../../dto/sneaker.dto';
+import { Observable } from 'rxjs';
+import { BrandDTO } from '../../dto/brand.dto';
+import { Select, Store } from '@ngxs/store';
+import { SneakersState } from '../../store/sneakers.store';
+import { SneakersViewModel } from '../../models/sneakers.view-model';
 
 @Component({
   selector: 'app-sneaker-modal',
@@ -24,11 +29,16 @@ export class SneakerModalComponent {
     gender: ['', [Validators.required]],
   });
 
+  brands$: Observable<BrandDTO[]>;
+
   constructor(
     private activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-    private sneakerService: SneakerService
-  ) {}
+    private sneakerService: SneakerService,
+    private store: Store
+  ) {
+    this.brands$ = this.store.select(SneakersState.brands);
+  }
 
   close(): void {
     this.activeModal.close();
@@ -42,11 +52,11 @@ export class SneakerModalComponent {
     const sizes = this.sizes.controls.map((control) => {
       const size = control.get('size')?.value;
       const quantity = control.get('quantity')?.value;
-      const sneakerSize = { size, quantity } as SneakerSize;
+      const sneakerSize = { size, quantity } as SneakerSizeDTO;
       return sneakerSize;
     });
 
-    const sneakerDTO: Sneaker = {
+    const sneakerDTO: SneakerDTO = {
       price: +this.sneakerForm.controls.price.value!,
       brand: +this.sneakerForm.controls.brand.value!,
       description: this.sneakerForm.controls.description.value!,

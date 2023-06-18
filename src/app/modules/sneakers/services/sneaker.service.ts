@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Sneaker } from '../models/sneaker.model';
+import { SneakerDTO } from '../dto/sneaker.dto';
 import { HttpClient } from '@angular/common/http';
+import { BrandDTO } from '../dto/brand.dto';
+import { Observable } from 'rxjs';
 
 interface ISneakerService {
-  addSneaker(sneakerDTO: Sneaker): void;
+  addSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO>;
+  loadBrands(): Observable<BrandDTO[]>;
+  loadSneakers(): Observable<SneakerDTO[]>;
 }
 
 @Injectable({
@@ -11,14 +15,21 @@ interface ISneakerService {
 })
 export class SneakerService implements ISneakerService {
   constructor(private http: HttpClient) {}
-  addSneaker(sneakerDTO: Sneaker): void {
-    this.http
-      .post('http://localhost:8080/api/admin/sneaker', JSON.stringify(sneakerDTO), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      })
-      .subscribe((e) => console.log(e));
+
+  loadSneakers(): Observable<SneakerDTO[]> {
+    return this.http.get<SneakerDTO[]>('http://localhost:8080/api/admin/sneaker');
+  }
+
+  addSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO> {
+    return this.http.post<SneakerDTO>('http://localhost:8080/api/admin/sneaker', JSON.stringify(sneakerDTO), {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+  }
+
+  loadBrands(): Observable<BrandDTO[]> {
+    return this.http.get<BrandDTO[]>('http://localhost:8080/api/admin/brand');
   }
 }

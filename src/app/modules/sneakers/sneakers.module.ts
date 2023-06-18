@@ -9,10 +9,20 @@ import { SneakerModalComponent } from './components/sneaker-modal/sneaker-modal.
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SneakerService } from './services/sneaker.service';
+import { NgxsModule } from '@ngxs/store';
+import { SneakersState } from './store/sneakers.store';
 
 @NgModule({
   declarations: [SneakersComponent, SneakerModalComponent],
-  imports: [CommonModule, AgGridModule, HttpClientModule, ReactiveFormsModule, SneakersRoutingModule, DragDropModule],
+  imports: [
+    CommonModule,
+    AgGridModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    SneakersRoutingModule,
+    DragDropModule,
+    NgxsModule.forFeature([SneakersState]),
+  ],
   providers: [SneakerService],
 })
 export class SneakersModule {}

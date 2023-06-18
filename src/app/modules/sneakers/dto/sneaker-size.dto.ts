@@ -1,4 +1,4 @@
-export interface SneakerSize {
+export interface SneakerSizeDTO {
   size: number;
   quantity: number;
 }
