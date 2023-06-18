@@ -7,7 +7,7 @@ import * as sneakersActions from './sneakers.actions';
 import { Observable, catchError, from, map } from 'rxjs';
 import { BrandDTO } from './../dto/brand.dto';
 import { HttpErrorResponse } from '@angular/common/http';
-import { patch, updateItem } from '@ngxs/store/operators';
+import { insertItem, patch, removeItem, updateItem } from '@ngxs/store/operators';
 
 export const sneakersState = (): SneakersViewModel => ({
   brands: [],
@@ -78,12 +78,14 @@ export class SneakersState {
 
   @Action(sneakersActions.AddSneakerSuccess)
   addSneakerSuccess(
-    { getState, patchState }: StateContext<SneakersViewModel>,
+    { setState, patchState }: StateContext<SneakersViewModel>,
     { payload }: sneakersActions.AddSneakerSuccess
   ): void {
-    const sneakers = getState().sneakers;
-    sneakers.push(payload);
-    patchState({ sneakers: sneakers });
+    setState(
+      patch({
+        sneakers: insertItem(payload),
+      })
+    );
   }
 
   @Action(sneakersActions.EditSneaker)
@@ -99,12 +101,63 @@ export class SneakersState {
 
   @Action(sneakersActions.EditSneakerSuccess)
   editSneakerSuccess(
-    { getState, setState }: StateContext<SneakersViewModel>,
+    { setState }: StateContext<SneakersViewModel>,
     { payload }: sneakersActions.EditSneakerSuccess
   ): void {
     setState(
       patch({
         sneakers: updateItem((sneaker) => sneaker.id === payload.id, patch(payload)),
+      })
+    );
+  }
+
+  @Action(sneakersActions.DeleteSneaker)
+  deleteSneaker(
+    { dispatch }: StateContext<SneakersViewModel>,
+    { payload }: sneakersActions.DeleteSneaker
+  ): Observable<void | SneakerDTO | Observable<void>> {
+    return from(this.sneakerService.deleteSneaker(payload)).pipe(
+      map((_) => dispatch(new sneakersActions.DeleteSneakerSuccess(payload))),
+      catchError((err: HttpErrorResponse) => dispatch(new sneakersActions.DeleteSneakerFail(err)))
+    );
+  }
+
+  @Action(sneakersActions.DeleteSneakerSuccess)
+  deleteSneakerSuccess(
+    { setState }: StateContext<SneakersViewModel>,
+    { payload }: sneakersActions.DeleteSneakerSuccess
+  ): void {
+    setState(
+      patch({
+        sneakers: removeItem((sneaker) => sneaker.id === payload),
+      })
+    );
+  }
+
+  @Action(sneakersActions.PremiumSneaker)
+  premiumSneaker(
+    { dispatch }: StateContext<SneakersViewModel>,
+    { payload }: sneakersActions.DeleteSneaker
+  ): Observable<void | SneakerDTO | Observable<void>> {
+    return from(this.sneakerService.premiumSneaker(payload)).pipe(
+      map((_) => dispatch(new sneakersActions.PremiumSneakerSuccess(payload))),
+      catchError((err: HttpErrorResponse) => dispatch(new sneakersActions.PremiumSneakerFail(err)))
+    );
+  }
+
+  @Action(sneakersActions.PremiumSneakerSuccess)
+  premiumSneakerSuccess(
+    { setState }: StateContext<SneakersViewModel>,
+    { payload }: sneakersActions.PremiumSneakerSuccess
+  ): void {
+    setState(
+      patch({
+        sneakers: updateItem((sneaker) => sneaker.special === true, patch({ special: false })),
+      })
+    );
+    setState(
+      patch({
+        sneakers: updateItem((sneaker) => sneaker.id === payload, patch({ special: true })),
       })
     );
   }

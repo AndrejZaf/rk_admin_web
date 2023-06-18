@@ -62,10 +62,12 @@ export class EditSneakerFail {
 
 export class DeleteSneaker {
   static readonly type = '[Sneakers] Delete Sneaker';
+  constructor(readonly payload: number) {}
 }
 
 export class DeleteSneakerSuccess {
   static readonly type = '[Sneakers] Delete Sneaker Success';
+  constructor(readonly payload: number) {}
 }
 
 export class DeleteSneakerFail {
@@ -73,8 +75,17 @@ export class DeleteSneakerFail {
   constructor(readonly payload: HttpErrorResponse) {}
 }
 
-export class SneakerPremium {}
+export class PremiumSneaker {
+  static readonly type = '[Sneakers] Premium Sneaker';
+  constructor(readonly payload: number) {}
+}
 
-export class SneakerPremiumSuccess {}
+export class PremiumSneakerSuccess {
+  static readonly type = '[Sneakers] Premium Sneaker Success';
+  constructor(readonly payload: number) {}
+}
 
-export class SneakerPremiumFail {}
+export class PremiumSneakerFail {
+  static readonly type = '[Sneakers] Premium Sneaker Fail';
+  constructor(readonly payload: HttpErrorResponse) {}
+}

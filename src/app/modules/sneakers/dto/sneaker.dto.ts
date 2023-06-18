@@ -9,4 +9,5 @@ export interface SneakerDTO {
   sizes: SneakerSizeDTO[];
   images: string[];
   gender: number;
+  special?: boolean;
 }

@@ -9,6 +9,8 @@ interface ISneakerService {
   editSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO>;
   loadBrands(): Observable<BrandDTO[]>;
   loadSneakers(): Observable<SneakerDTO[]>;
+  deleteSneaker(id: number): Observable<void>;
+  premiumSneaker(id: number): Observable<void>;
 }
 
 @Injectable({
@@ -37,6 +39,14 @@ export class SneakerService implements ISneakerService {
         Accept: 'application/json',
       },
     });
+  }
+
+  deleteSneaker(id: number): Observable<void> {
+    return this.http.delete<void>(`http://localhost:8080/api/admin/sneaker?id=${id}`);
+  }
+
+  premiumSneaker(id: number): Observable<void> {
+    return this.http.patch<void>(`http://localhost:8080/api/admin/sneaker?id=${id}`, {});
   }
 
   loadBrands(): Observable<BrandDTO[]> {

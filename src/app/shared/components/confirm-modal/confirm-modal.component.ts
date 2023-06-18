@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,6 +12,7 @@ export class ConfirmModalComponent {
   @Input() confirmationText?: string;
   @Input() cancelationText?: string;
   @Input() isDangerousOperation: boolean = false;
+  @Output() emitData: EventEmitter<any> = new EventEmitter();
 
   constructor(private activeModal: NgbActiveModal) {}
 
@@ -20,6 +21,7 @@ export class ConfirmModalComponent {
   }
 
   confirm(): void {
+    this.emitData.emit();
     this.activeModal.close();
   }
 }
