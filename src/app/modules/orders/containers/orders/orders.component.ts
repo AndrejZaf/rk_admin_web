@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { CellClickedEvent, ColDef, GridApi, GridReadyEvent, ISelectCellEditorParams } from 'ag-grid-community';
+import { ColDef, GridApi, GridReadyEvent, ISelectCellEditorParams } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { orders } from '../../data/orders';
 import { OrderStatus } from '../../enums/order-status.enum';
@@ -65,9 +65,5 @@ export class OrdersComponent {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
     this.rowData$ = of(orders);
-  }
-
-  onCellClicked(e: CellClickedEvent): void {
-    // console.log('cellClicked', e);
   }
 }

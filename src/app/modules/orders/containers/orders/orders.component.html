@@ -11,8 +11,6 @@
       [rowData]="rowData$ | async"
       [rowSelection]="'multiple'"
       [animateRows]="true"
-      (gridReady)="onGridReady($event)"
-      (cellClicked)="onCellClicked($event)"
-    ></ag-grid-angular>
+      (gridReady)="onGridReady($event)"></ag-grid-angular>
   </div>
 </section>

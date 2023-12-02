@@ -12,8 +12,7 @@
       [rowData]="rowData$ | async"
       [rowSelection]="'multiple'"
       [animateRows]="true"
-      (gridReady)="onGridReady($event)"
-      (cellClicked)="onCellClicked($event)"></ag-grid-angular>
+      (gridReady)="onGridReady($event)"></ag-grid-angular>
     <div class="d-flex justify-content-end mt-3">
       <button type="button" class="btn btn-outline-charcoal-alt" (click)="downloadEmails()">Download CSV</button>
     </div>
