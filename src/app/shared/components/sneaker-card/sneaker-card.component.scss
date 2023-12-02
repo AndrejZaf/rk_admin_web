@@ -95,3 +95,8 @@
     }
   }
 }
+
+.sneaker-card[hidden] {
+  visibility: hidden;
+  display: block !important;
+}
