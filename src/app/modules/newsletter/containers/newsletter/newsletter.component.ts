@@ -1,23 +1,25 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
-import { Observable, of } from 'rxjs';
-import { emails } from '../../data/emails';
+import { Observable, Subject, map, of, takeUntil } from 'rxjs';
 import { ButtonCellRendererComponent } from 'src/app/shared/components/button-cell-renderer/button-cell-renderer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerModalComponent } from '../../components/customer-modal/customer-modal.component';
-import { Email } from '../../models/email.model';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
+import { Actions, Store, ofActionSuccessful } from '@ngxs/store';
+import { NewsletterSubscriptionDTO } from '../../dtos/newsletter-subscription.dto';
+import * as newsletterActions from '../../store/newsletter.actions';
+import { NewsletterState } from '../../store/newsletter.store';
 
 @Component({
   selector: 'app-newsletter',
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.scss'],
 })
-export class NewsletterComponent {
+export class NewsletterComponent implements OnInit {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
   private gridApi!: GridApi;
+  unsubscribe$ = new Subject<void>();
   public columnDefs: ColDef[] = [
     {
       headerName: 'Email',
@@ -29,16 +31,24 @@ export class NewsletterComponent {
     {
       field: '',
       cellRenderer: ButtonCellRendererComponent,
-      valueGetter: (params) => params.data.email,
+      valueGetter: (params) => params.data.id,
       cellRendererParams: {
-        clicked: (field: CellClickedEvent) => {
+        clicked: (field: any) => {
           const modalRef = this.modalService.open(CustomerModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',
             size: 'lg',
           });
           modalRef.componentInstance.isEdit = true;
-          modalRef.componentInstance.email = field;
+          this.newsletterSubscriptions$
+            .pipe(
+              map((newsletterSubscriptions) =>
+                newsletterSubscriptions.find((newsletterSubscription) => newsletterSubscription.id === field)
+              )
+            )
+            .subscribe(
+              (newsletterSubscription) => (modalRef.componentInstance.newsletterSubscription = newsletterSubscription)
+            );
         },
         icon: 'bi bi-pencil',
       },
@@ -61,6 +71,9 @@ export class NewsletterComponent {
           modalRef.componentInstance.confirmationText = 'Confirm';
           modalRef.componentInstance.cancelationText = 'Cancel';
           modalRef.componentInstance.isDangerousOperation = true;
+          modalRef.componentInstance.emitData.subscribe((_: any) => {
+            this.store.dispatch(new newsletterActions.DeleteNewsletterSubscription(field));
+          });
         },
         icon: 'bi bi-trash',
       },
@@ -70,14 +83,24 @@ export class NewsletterComponent {
     },
   ];
 
-  public rowData$!: Observable<Email[]>;
+  public newsletterSubscriptions$!: Observable<NewsletterSubscriptionDTO[]>;
 
-  constructor(private http: HttpClient, private modalService: NgbModal) {}
+  constructor(private store: Store, private modalService: NgbModal, private actions$: Actions) {
+    this.newsletterSubscriptions$ = this.store.select(NewsletterState.newsletterSubscriptions);
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.loadNewsletterSubscriptions();
+    this.setupActionListeners();
+  }
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
-    this.rowData$ = of(emails);
+  }
+
+  private loadNewsletterSubscriptions(): void {
+    this.store.dispatch(new newsletterActions.LoadNewsletterSubscriptions());
   }
 
   addEmail(): void {
@@ -93,5 +116,19 @@ export class NewsletterComponent {
     this.gridApi.exportDataAsCsv({
       fileName: `${'newsletter-emails-' + date}`,
     });
+  }
+
+  private actionListenerCallback(action: any, callback: (payload: any) => void): void {
+    this.actions$
+      .pipe(ofActionSuccessful(action), takeUntil(this.unsubscribe$))
+      .subscribe(({ payload }) => callback(payload));
+  }
+
+  private setupActionListeners(): void {
+    this.actionListenerCallback(newsletterActions.AddNewsletterSubscriptionSuccess, this.refreshTable.bind(this));
+  }
+
+  private refreshTable(): void {
+    this.gridApi.redrawRows();
   }
 }

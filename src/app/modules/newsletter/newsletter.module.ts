@@ -7,9 +7,18 @@ import { CustomerModalComponent } from './components/customer-modal/customer-mod
 import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewsletterState } from './store/newsletter.store';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [NewsletterComponent, CustomerModalComponent],
-  imports: [CommonModule, AgGridModule, HttpClientModule, ReactiveFormsModule, NewsletterRoutingModule],
+  imports: [
+    CommonModule,
+    AgGridModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NewsletterRoutingModule,
+    NgxsModule.forFeature([NewsletterState]),
+  ],
 })
 export class NewsletterModule {}
