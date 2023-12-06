@@ -20,11 +20,11 @@ export class SneakerService implements ISneakerService {
   constructor(private http: HttpClient) {}
 
   loadSneakers(): Observable<SneakerDTO[]> {
-    return this.http.get<SneakerDTO[]>('http://localhost:8080/api/admin/sneaker');
+    return this.http.get<SneakerDTO[]>('http://localhost:8080/api/inventory/sneaker/all');
   }
 
   addSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO> {
-    return this.http.post<SneakerDTO>('http://localhost:8080/api/admin/sneaker', JSON.stringify(sneakerDTO), {
+    return this.http.post<SneakerDTO>('http://localhost:8080/api/inventory/sneaker', JSON.stringify(sneakerDTO), {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -33,7 +33,7 @@ export class SneakerService implements ISneakerService {
   }
 
   editSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO> {
-    return this.http.put<SneakerDTO>('http://localhost:8080/api/admin/sneaker', JSON.stringify(sneakerDTO), {
+    return this.http.put<SneakerDTO>('http://localhost:8080/api/inventory/sneaker', JSON.stringify(sneakerDTO), {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -42,14 +42,14 @@ export class SneakerService implements ISneakerService {
   }
 
   deleteSneaker(id: number): Observable<void> {
-    return this.http.delete<void>(`http://localhost:8080/api/admin/sneaker?id=${id}`);
+    return this.http.delete<void>(`http://localhost:8080/api/inventory/sneaker?id=${id}`);
   }
 
   premiumSneaker(id: number): Observable<void> {
-    return this.http.patch<void>(`http://localhost:8080/api/admin/sneaker?id=${id}`, {});
+    return this.http.patch<void>(`http://localhost:8080/api/inventory/sneaker?id=${id}`, {});
   }
 
   loadBrands(): Observable<BrandDTO[]> {
-    return this.http.get<BrandDTO[]>('http://localhost:8080/api/admin/brand');
+    return this.http.get<BrandDTO[]>('http://localhost:8080/api/inventory/brand');
   }
 }
