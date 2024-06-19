@@ -24,6 +24,13 @@
         </li>
       </ul>
     </div>
-    <div class="d-lg-flex col-lg-2 justify-content-lg-end d-none d-lg-block"></div>
+    <div class="d-lg-flex col-lg-2 justify-content-lg-end d-none d-lg-block">
+      <div ngbDropdown class="d-inline-block">
+        <i class="bi bi-person-circle cart-icon" ngbDropdownToggle></i>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem (click)="logout()">Log Out</button>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>

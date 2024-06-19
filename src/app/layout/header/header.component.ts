@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-header',
@@ -12,4 +13,10 @@ export class HeaderComponent {
     { link: '/orders', title: 'Orders' },
   ];
   isCollapsed = true;
+
+  constructor(private keycloakService: KeycloakService) {}
+
+  logout(): void {
+    this.keycloakService.logout();
+  }
 }
