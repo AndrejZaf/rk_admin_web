@@ -4,6 +4,7 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { SalesModel } from '../../models/sales.model';
 import { SneakerService } from '../../services/sneaker.service';
 import { SneakerDTO } from '../../dto/sneaker.dto';
+import { SaleDTO } from '../../dto/sale.dto';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,8 @@ import { SneakerDTO } from '../../dto/sneaker.dto';
 })
 export class DashboardComponent implements OnInit {
   selectedPremiumSneaker: SneakerDTO | null = null;
-  salesData: SalesModel[] = [];
+  mostWantedSneaker: SneakerDTO | null = null;
+  salesData: SaleDTO[] = [];
   view: Number[] = [700, 300];
   legend: boolean = true;
   showLabels: boolean = true;
@@ -32,19 +34,19 @@ export class DashboardComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
-  constructor(private sneakerService: SneakerService) {
-    Object.assign(this, { salesData });
-  }
+  constructor(private sneakerService: SneakerService) {}
+
   ngOnInit(): void {
     this.sneakerService.getPremiumSneaker().subscribe((data: SneakerDTO) => {
-      console.log(data);
       this.selectedPremiumSneaker = data;
     });
-  }
 
-  mostWantedSneaker = {
-    name: 'Air Jordan 1 Low SE Light Olive',
-    price: 250,
-    url: 'https://cdn.shopify.com/s/files/1/2358/2817/products/air-jordan-1-low-se-light-olive.png?v=1661790120',
-  };
+    this.sneakerService.getPopularSneaker().subscribe((data: SneakerDTO) => {
+      this.mostWantedSneaker = data;
+    });
+
+    this.sneakerService.getSneakerSaleStats().subscribe((data: SaleDTO[]) => {
+      this.salesData = data;
+    });
+  }
 }
