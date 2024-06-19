@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8090',
+        realm: 'rk_ecommerce',
+        clientId: 'rk_admin_web',
+      },
+      initOptions: {
+        onLoad: 'login-required',
+      },
+    });
+}
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, ContentLayoutComponent],
@@ -22,10 +37,18 @@ import { NgxsModule } from '@ngxs/store';
     HttpClientModule,
     SharedModule,
     AppRoutingModule,
+    KeycloakAngularModule,
     NgbModule,
     NgxsModule.forRoot([]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

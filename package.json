@@ -23,6 +23,8 @@
     "@ngxs/store": "^3.8.1",
     "@popperjs/core": "^2.11.6",
     "@swimlane/ngx-charts": "^20.1.2",
+    "keycloak-angular": "^14.4.0",
+    "keycloak-js": "^21.1.2",
     "ag-grid-angular": "^29.3.3",
     "ag-grid-community": "^29.3.3",
     "bootstrap": "^5.2.3",
