@@ -29,7 +29,8 @@
     <div class="col-sm-6 col-md-12 col-lg-6">
       <h4 class="fw-semibold text-capitalize">Selected premium sneaker</h4>
       <app-sneaker-card
-        [sneakerUrl]="selectedPremiumSneaker.url"
+        *ngIf="selectedPremiumSneaker"
+        [sneakerUrl]="selectedPremiumSneaker.images[0]"
         [sneakerName]="selectedPremiumSneaker.name"
         [sneakerPrice]="selectedPremiumSneaker.price"></app-sneaker-card>
     </div>

@@ -10,7 +10,6 @@ export class HeaderComponent {
     { link: '/', title: 'Home' },
     { link: '/sneakers', title: 'Sneakers' },
     { link: '/orders', title: 'Orders' },
-    { link: '/newsletter', title: 'Newsletter' },
   ];
   isCollapsed = true;
 }

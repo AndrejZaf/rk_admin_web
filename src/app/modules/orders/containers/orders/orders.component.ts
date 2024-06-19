@@ -1,31 +1,33 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridApi, GridReadyEvent, ISelectCellEditorParams } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { orders } from '../../data/orders';
 import { OrderStatus } from '../../enums/order-status.enum';
 import { Order } from '../../models/order.model';
+import { OrderService } from '../../services/order.service';
+import { OrderDTO } from '../../dto/order.dto';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],
 })
-export class OrdersComponent {
+export class OrdersComponent implements OnInit {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
   private gridApi!: GridApi;
+  public rowData$!: Observable<OrderDTO[]>;
   public columnDefs: ColDef[] = [
     {
       headerName: 'Order ID',
-      field: 'orderId',
+      field: 'id',
       filter: true,
       sortable: true,
-      width: 100,
     },
     {
       headerName: 'Order Price',
-      field: 'orderPrice',
+      field: 'totalPrice',
       filter: true,
       sortable: true,
     },
@@ -40,30 +42,26 @@ export class OrdersComponent {
       field: 'address',
       filter: true,
       sortable: true,
-      width: 100,
     },
     {
       headerName: 'Order Status',
       field: 'orderStatus',
-      cellEditor: 'agSelectCellEditor',
-      editable: true,
-      singleClickEdit: true,
-      cellEditorParams: {
-        values: [OrderStatus.READY_FOR_DISPATCH, OrderStatus.DISPATCHED, OrderStatus.DELIVERED],
-      } as ISelectCellEditorParams,
       filter: true,
       sortable: true,
-      width: 100,
+      valueFormatter: (params) => {
+        const val = params.value.replaceAll('_', ' ');
+        return val[0].toUpperCase() + val.slice(1).toLowerCase();
+      },
     },
   ];
 
-  public rowData$!: Observable<Order[]>;
-
-  constructor(private http: HttpClient) {}
+  constructor(private orderService: OrderService) {}
+  ngOnInit(): void {
+    this.rowData$ = this.orderService.loadOrders();
+  }
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
-    this.rowData$ = of(orders);
   }
 }
