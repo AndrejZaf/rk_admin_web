@@ -11,11 +11,11 @@ export class SneakerService {
   constructor(private http: HttpClient) {}
 
   getPremiumSneaker(): Observable<SneakerDTO> {
-    return this.http.get<SneakerDTO>('http://localhost:8080/api/inventory/sneaker/premium');
+    return this.http.get<SneakerDTO>('http://localhost:8080/api/inventory/sneakers/premium');
   }
 
   getPopularSneaker(): Observable<SneakerDTO> {
-    return this.http.get<SneakerDTO>('http://localhost:8080/api/inventory/sneaker/popular');
+    return this.http.get<SneakerDTO>('http://localhost:8080/api/inventory/sneakers/popular');
   }
 
   getSneakerSaleStats(): Observable<SaleDTO[]> {
