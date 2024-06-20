@@ -19,6 +19,6 @@ export class SneakerService {
   }
 
   getSneakerSaleStats(): Observable<SaleDTO[]> {
-    return this.http.get<SaleDTO[]>('http://localhost:8080/api/order/statistics');
+    return this.http.get<SaleDTO[]>('http://localhost:8080/api/orders/statistics');
   }
 }

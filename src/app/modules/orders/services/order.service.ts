@@ -10,6 +10,6 @@ export class OrderService {
   constructor(private http: HttpClient) {}
 
   loadOrders(): Observable<OrderDTO[]> {
-    return this.http.get<OrderDTO[]>('http://localhost:8080/api/order');
+    return this.http.get<OrderDTO[]>('http://localhost:8080/api/orders');
   }
 }
