@@ -23,6 +23,17 @@
           </button>
         </li>
       </ul>
+      <div class="text-center d-lg-none">
+        <div *ngIf="!isLoggedIn">
+          <button
+            type="button"
+            class="btn btn-outline-charcoal text-uppercase"
+            routerLinkActive="active"
+            (click)="logout()">
+            Log Out
+          </button>
+        </div>
+      </div>
     </div>
     <div class="d-lg-flex col-lg-2 justify-content-lg-end d-none d-lg-block">
       <div ngbDropdown class="d-inline-block">

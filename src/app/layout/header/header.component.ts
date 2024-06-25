@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 
 @Component({
@@ -6,7 +6,8 @@ import { KeycloakService } from 'keycloak-angular';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  public isLoggedIn: boolean = false;
   navItems = [
     { link: '/', title: 'Home' },
     { link: '/sneakers', title: 'Sneakers' },
@@ -16,7 +17,23 @@ export class HeaderComponent {
 
   constructor(private keycloakService: KeycloakService) {}
 
+  ngOnInit(): void {
+    this.isUserLoggedIn();
+  }
+
   logout(): void {
     this.keycloakService.logout();
+  }
+
+  isUserLoggedIn(): void {
+    this.keycloakService
+      .isLoggedIn()
+      .then((loggedIn) => {
+        this.isLoggedIn = !loggedIn;
+      })
+      .catch((err) => {
+        console.log(err);
+        this.isLoggedIn = false;
+      });
   }
 }
