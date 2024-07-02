@@ -10,6 +10,7 @@ import { Actions, Store, ofActionSuccessful } from '@ngxs/store';
 import * as sneakersActions from '../../store/sneakers.actions';
 import { SneakersState } from '../../store/sneakers.store';
 import { SneakerDTO } from '../../dto/sneaker.dto';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-sneakers',
@@ -57,6 +58,7 @@ export class SneakersComponent implements OnInit {
           modalRef.componentInstance.confirmationText = 'Confirm';
           modalRef.componentInstance.cancelationText = 'Cancel';
           modalRef.componentInstance.emitData.subscribe((_: any) => {
+            this.toastService.show('Premium sneaker successfully selected', '');
             this.store.dispatch(new sneakersActions.PremiumSneaker(field.id));
           });
         },
@@ -112,6 +114,7 @@ export class SneakersComponent implements OnInit {
           modalRef.componentInstance.isDangerousOperation = true;
           modalRef.componentInstance.emitData.subscribe((_: any) => {
             this.store.dispatch(new sneakersActions.DeleteSneaker(field));
+            this.toastService.show('Sneaker deleted successfully', '');
           });
         },
         icon: 'bi bi-trash',
@@ -124,7 +127,12 @@ export class SneakersComponent implements OnInit {
 
   public sneakers$: Observable<SneakerDTO[]>;
 
-  constructor(private store: Store, private modalService: NgbModal, private actions$: Actions) {
+  constructor(
+    private store: Store,
+    private modalService: NgbModal,
+    private actions$: Actions,
+    private toastService: ToastService
+  ) {
     this.sneakers$ = this.store.select(SneakersState.sneakers);
   }
 

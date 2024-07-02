@@ -4,10 +4,11 @@ import { SneakerCardComponent } from './components/sneaker-card/sneaker-card.com
 import { ButtonCellRendererComponent } from './components/button-cell-renderer/button-cell-renderer.component';
 
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [SneakerCardComponent, ButtonCellRendererComponent, ConfirmModalComponent],
   exports: [SneakerCardComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, ToastrModule.forRoot()],
 })
 export class SharedModule {}

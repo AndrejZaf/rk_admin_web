@@ -9,6 +9,7 @@ import { BrandDTO } from '../../dto/brand.dto';
 import { Actions, Store, ofActionSuccessful } from '@ngxs/store';
 import { SneakersState } from '../../store/sneakers.store';
 import * as sneakersActions from '../../store/sneakers.actions';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-sneaker-modal',
@@ -27,7 +28,8 @@ export class SneakerModalComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
+    private toastService: ToastService
   ) {
     this.sneakerForm = this.formBuilder.group({
       image: ['', [Validators.required]],
@@ -142,10 +144,12 @@ export class SneakerModalComponent implements OnInit {
   }
 
   private addSneakerSuccess(): void {
+    this.toastService.show('Sucessfully created a sneaker', '');
     this.close();
   }
 
   private editSneakerSuccess(): void {
+    this.toastService.show('Sucessfully editted a sneaker', '');
     this.close();
   }
 }

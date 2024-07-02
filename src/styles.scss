@@ -72,3 +72,11 @@ body {
 .ag-layout-normal > .ag-body-viewport.ag-layout-normal {
   overflow-y: overlay;
 }
+
+.toast-container .ngx-toastr {
+  border-radius: unset !important;
+}
+
+.toast-success {
+  background-color: #36454f !important;
+}
