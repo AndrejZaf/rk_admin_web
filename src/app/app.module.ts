@@ -15,12 +15,13 @@ import { NgxsModule } from '@ngxs/store';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from 'src/environments/environment';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:8090',
+        url: environment.keycloakUrl,
         realm: 'rk_ecommerce',
         clientId: 'rk_admin_web',
       },

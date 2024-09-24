@@ -3,6 +3,7 @@ import { SneakerDTO } from '../dto/sneaker.dto';
 import { HttpClient } from '@angular/common/http';
 import { BrandDTO } from '../dto/brand.dto';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 interface ISneakerService {
   addSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO>;
@@ -20,11 +21,11 @@ export class SneakerService implements ISneakerService {
   constructor(private http: HttpClient) {}
 
   loadSneakers(): Observable<SneakerDTO[]> {
-    return this.http.get<SneakerDTO[]>('http://localhost:8080/api/inventory/sneakers/all');
+    return this.http.get<SneakerDTO[]>(`${environment.apiUrl}/api/inventory/sneakers/all`);
   }
 
   addSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO> {
-    return this.http.post<SneakerDTO>('http://localhost:8080/api/inventory/sneakers', JSON.stringify(sneakerDTO), {
+    return this.http.post<SneakerDTO>(`${environment.apiUrl}/api/inventory/sneakers`, JSON.stringify(sneakerDTO), {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -33,7 +34,7 @@ export class SneakerService implements ISneakerService {
   }
 
   editSneaker(sneakerDTO: SneakerDTO): Observable<SneakerDTO> {
-    return this.http.put<SneakerDTO>('http://localhost:8080/api/inventory/sneakers', JSON.stringify(sneakerDTO), {
+    return this.http.put<SneakerDTO>(`${environment.apiUrl}/api/inventory/sneakers`, JSON.stringify(sneakerDTO), {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -42,14 +43,14 @@ export class SneakerService implements ISneakerService {
   }
 
   deleteSneaker(id: number): Observable<void> {
-    return this.http.delete<void>(`http://localhost:8080/api/inventory/sneakers?id=${id}`);
+    return this.http.delete<void>(`${environment.apiUrl}/api/inventory/sneakers?id=${id}`);
   }
 
   premiumSneaker(id: number): Observable<void> {
-    return this.http.patch<void>(`http://localhost:8080/api/inventory/sneakers?id=${id}`, {});
+    return this.http.patch<void>(`${environment.apiUrl}/api/inventory/sneakers?id=${id}`, {});
   }
 
   loadBrands(): Observable<BrandDTO[]> {
-    return this.http.get<BrandDTO[]>('http://localhost:8080/api/inventory/brands');
+    return this.http.get<BrandDTO[]>(`${environment.apiUrl}/api/inventory/brands`);
   }
 }
