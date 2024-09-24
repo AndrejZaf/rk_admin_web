@@ -6,11 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./sneaker-card.component.scss'],
 })
 export class SneakerCardComponent {
-  showInfo: boolean = false;
-  @Input() sneakerName: string = '';
-  @Input() sneakerUrl: string = '';
-  @Input() sneakerPrice: number = 0;
-  @Input() sneakerDescription: string = '';
+  showInfo = false;
+  @Input() sneakerName = '';
+  @Input() sneakerUrl = '';
+  @Input() sneakerPrice = 0;
+  @Input() sneakerDescription = '';
 
   showAdditionalInfo() {
     this.showInfo = true;

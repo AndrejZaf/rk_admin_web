@@ -7,7 +7,7 @@ import { KeycloakService } from 'keycloak-angular';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  public isLoggedIn: boolean = false;
+  public isLoggedIn = false;
   navItems = [
     { link: '/', title: 'Home' },
     { link: '/sneakers', title: 'Sneakers' },

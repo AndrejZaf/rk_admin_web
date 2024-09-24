@@ -115,7 +115,7 @@ export class SneakerModalComponent implements OnInit {
   onSelectFiles(event: any): void {
     if (event.target.files && event.target.files[0]) {
       Object.keys(event.target.files).forEach((file: any) => {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.readAsDataURL(event.target.files[file]);
         reader.onload = (event) => {
           this.urls.push(event.target!.result!.toString());

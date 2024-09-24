@@ -15,17 +15,17 @@ export class DashboardComponent implements OnInit {
   selectedPremiumSneaker: SneakerDTO | null = null;
   mostWantedSneaker: SneakerDTO | null = null;
   salesData: SaleDTO[] = [];
-  view: Number[] = [700, 300];
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Date';
-  yAxisLabel: string = 'Sneakers Sold';
-  timeline: boolean = true;
+  view: number[] = [700, 300];
+  legend = true;
+  showLabels = true;
+  animations = true;
+  xAxis = true;
+  yAxis = true;
+  showYAxisLabel = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Date';
+  yAxisLabel = 'Sneakers Sold';
+  timeline = true;
 
   colorScheme: Color = {
     name: 'cust',
