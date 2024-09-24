@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, GridApi, GridReadyEvent, ValueGetterParams } from 'ag-grid-community';
 import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { ButtonCellRendererComponent } from './../../../../shared/components/button-cell-renderer/button-cell-renderer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -45,10 +45,10 @@ export class SneakersComponent implements OnInit {
     },
     {
       headerName: '',
-      valueGetter: (params: any) => params.data,
+      valueGetter: (params: ValueGetterParams) => params.data.id,
       cellRenderer: ButtonCellRendererComponent,
       cellRendererParams: {
-        clicked: (field: any) => {
+        clicked: (field: number) => {
           const modalRef = this.modalService.open(ConfirmModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',
@@ -59,7 +59,7 @@ export class SneakersComponent implements OnInit {
           modalRef.componentInstance.cancelationText = 'Cancel';
           modalRef.componentInstance.emitData.subscribe(() => {
             this.toastService.show('Premium sneaker successfully selected', '');
-            this.store.dispatch(new sneakersActions.PremiumSneaker(field.id));
+            this.store.dispatch(new sneakersActions.PremiumSneaker(field));
           });
         },
       },
@@ -76,10 +76,10 @@ export class SneakersComponent implements OnInit {
     },
     {
       headerName: '',
-      valueGetter: (params: any) => params.data.id,
+      valueGetter: (params: ValueGetterParams) => params.data.id,
       cellRenderer: ButtonCellRendererComponent,
       cellRendererParams: {
-        clicked: (field: any) => {
+        clicked: (field: number | undefined) => {
           const modalRef = this.modalService.open(SneakerModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',
@@ -99,10 +99,10 @@ export class SneakersComponent implements OnInit {
     },
     {
       headerName: '',
-      valueGetter: (params: any) => params.data.id,
+      valueGetter: (params: ValueGetterParams) => params.data.id,
       cellRenderer: ButtonCellRendererComponent,
       cellRendererParams: {
-        clicked: (field: any) => {
+        clicked: (field: number) => {
           const modalRef = this.modalService.open(ConfirmModalComponent, {
             centered: true,
             backdropClass: 'blur-backdrop',

@@ -14,7 +14,7 @@ export class ButtonCellRendererComponent implements ICellRendererAngularComp {
     this.params = params;
   }
 
-  btnClickedHandler() {
+  btnClickedHandler(): void {
     this.params.clicked(this.params.value);
   }
 
