@@ -12,7 +12,7 @@ export class ConfirmModalComponent {
   @Input() confirmationText?: string;
   @Input() cancelationText?: string;
   @Input() isDangerousOperation = false;
-  @Output() emitData: EventEmitter<any> = new EventEmitter();
+  @Output() emitData: EventEmitter<void> = new EventEmitter();
 
   constructor(private activeModal: NgbActiveModal) {}
 

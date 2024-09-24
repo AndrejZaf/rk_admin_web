@@ -50,13 +50,13 @@ export class SneakerModalComponent implements OnInit {
   }
   ngOnInit(): void {
     this.setupActionListeners();
-    if (this.isEdit) {
-      this.sneakerForm.controls['name'].setValue(this.sneaker!.name);
-      this.sneakerForm.controls['description'].setValue(this.sneaker!.description);
-      this.sneakerForm.controls['price'].setValue(this.sneaker!.price);
-      this.sneakerForm.controls['gender'].setValue(this.sneaker!.gender);
-      this.sneakerForm.controls['brand'].setValue(this.sneaker!.brandId);
-      this.sneakerForm.controls['image'].setValue(this.sneaker!.images);
+    if (this.isEdit && this.sneaker) {
+      this.sneakerForm.controls['name'].setValue(this.sneaker.name);
+      this.sneakerForm.controls['description'].setValue(this.sneaker.description);
+      this.sneakerForm.controls['price'].setValue(this.sneaker.price);
+      this.sneakerForm.controls['gender'].setValue(this.sneaker.gender);
+      this.sneakerForm.controls['brand'].setValue(this.sneaker.brandId);
+      this.sneakerForm.controls['image'].setValue(this.sneaker.images);
       this.sneaker?.sizes.map((sneakerSize: SneakerSizeDTO) => {
         const sizeQuantity = this.formBuilder.group({
           size: [sneakerSize.size, [Validators.required]],
@@ -64,7 +64,7 @@ export class SneakerModalComponent implements OnInit {
         });
         this.sizes.push(sizeQuantity);
       });
-      this.urls = this.sneaker!.images;
+      this.urls = this.sneaker.images;
     }
   }
 
@@ -85,13 +85,13 @@ export class SneakerModalComponent implements OnInit {
     });
 
     const sneakerDTO: SneakerDTO = {
-      price: +this.sneakerForm.controls['price'].value!,
-      brandId: +this.sneakerForm.controls['brand'].value!,
-      description: this.sneakerForm.controls['description'].value!,
-      name: this.sneakerForm.controls['name'].value!,
+      price: +this.sneakerForm.controls['price'].value,
+      brandId: +this.sneakerForm.controls['brand'].value,
+      description: this.sneakerForm.controls['description'].value,
+      name: this.sneakerForm.controls['name'].value,
       sizes: sizes,
       images: this.urls,
-      gender: +this.sneakerForm.controls['gender'].value!,
+      gender: +this.sneakerForm.controls['gender'].value,
     };
 
     if (this.isEdit) {
@@ -118,13 +118,16 @@ export class SneakerModalComponent implements OnInit {
     this.sizes.removeAt(sizeIndex);
   }
 
-  onSelectFiles(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      Object.keys(event.target.files).forEach((file: any) => {
+  onSelectFiles(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files[0]) {
+      Object.keys(target.files).forEach((_, index: number) => {
         const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[file]);
+        target.files ? reader.readAsDataURL(target.files[index]) : '';
         reader.onload = (event) => {
-          this.urls.push(event.target!.result!.toString());
+          if (event.target && event.target.result) {
+            this.urls.push(event.target.result.toString());
+          }
         };
       });
     }
@@ -138,7 +141,7 @@ export class SneakerModalComponent implements OnInit {
     this.urls.splice(this.urls.indexOf(image), 1);
   }
 
-  private actionListenerCallback(action: any, callback: (payload: any) => void): void {
+  private actionListenerCallback(action: any, callback: (payload: void) => void): void {
     this.actions$
       .pipe(ofActionSuccessful(action), takeUntil(this.unsubscribe$))
       .subscribe(({ payload }) => callback(payload));

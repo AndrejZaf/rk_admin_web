@@ -1,6 +1,6 @@
 import { SalesModel } from '../models/sales.model';
 
-export var salesData: SalesModel[] = [
+export const salesData: SalesModel[] = [
   {
     name: 'Nike',
     series: [

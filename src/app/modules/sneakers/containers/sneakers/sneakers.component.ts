@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
-import { Observable, Subject, map, of, takeUntil } from 'rxjs';
+import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { ButtonCellRendererComponent } from './../../../../shared/components/button-cell-renderer/button-cell-renderer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
@@ -57,7 +57,7 @@ export class SneakersComponent implements OnInit {
           modalRef.componentInstance.body = 'Are you sure you want to make this sneaker premium?';
           modalRef.componentInstance.confirmationText = 'Confirm';
           modalRef.componentInstance.cancelationText = 'Cancel';
-          modalRef.componentInstance.emitData.subscribe((_: any) => {
+          modalRef.componentInstance.emitData.subscribe(() => {
             this.toastService.show('Premium sneaker successfully selected', '');
             this.store.dispatch(new sneakersActions.PremiumSneaker(field.id));
           });
@@ -112,7 +112,7 @@ export class SneakersComponent implements OnInit {
           modalRef.componentInstance.confirmationText = 'Confirm';
           modalRef.componentInstance.cancelationText = 'Cancel';
           modalRef.componentInstance.isDangerousOperation = true;
-          modalRef.componentInstance.emitData.subscribe((_: any) => {
+          modalRef.componentInstance.emitData.subscribe(() => {
             this.store.dispatch(new sneakersActions.DeleteSneaker(field));
             this.toastService.show('Sneaker deleted successfully', '');
           });

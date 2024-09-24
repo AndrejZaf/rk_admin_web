@@ -1,4 +1,4 @@
-export var sneakersData = [
+export const sneakersData = [
   {
     brand: 'Nike',
     name: "Air Force 1 '07'",

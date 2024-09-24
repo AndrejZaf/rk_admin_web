@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { salesData } from '../../data/data';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
-import { SalesModel } from '../../models/sales.model';
 import { SneakerService } from '../../services/sneaker.service';
 import { SneakerDTO } from '../../dto/sneaker.dto';
 import { SaleDTO } from '../../dto/sale.dto';

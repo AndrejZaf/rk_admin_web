@@ -18,7 +18,7 @@ export class ButtonCellRendererComponent implements ICellRendererAngularComp {
     this.params.clicked(this.params.value);
   }
 
-  refresh(params: ICellRendererParams): boolean {
+  refresh(): boolean {
     return true;
   }
 }

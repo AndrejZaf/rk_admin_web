@@ -1,11 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GridApi, GridReadyEvent, ISelectCellEditorParams } from 'ag-grid-community';
-import { Observable, of } from 'rxjs';
-import { orders } from '../../data/orders';
-import { OrderStatus } from '../../enums/order-status.enum';
-import { Order } from '../../models/order.model';
+import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { Observable } from 'rxjs';
 import { OrderService } from '../../services/order.service';
 import { OrderDTO } from '../../dto/order.dto';
 

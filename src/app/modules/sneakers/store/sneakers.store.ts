@@ -78,7 +78,7 @@ export class SneakersState {
 
   @Action(sneakersActions.AddSneakerSuccess)
   addSneakerSuccess(
-    { setState, patchState }: StateContext<SneakersViewModel>,
+    { setState }: StateContext<SneakersViewModel>,
     { payload }: sneakersActions.AddSneakerSuccess
   ): void {
     setState(
@@ -117,7 +117,7 @@ export class SneakersState {
     { payload }: sneakersActions.DeleteSneaker
   ): Observable<void | SneakerDTO | Observable<void>> {
     return from(this.sneakerService.deleteSneaker(payload)).pipe(
-      map((_) => dispatch(new sneakersActions.DeleteSneakerSuccess(payload))),
+      map(() => dispatch(new sneakersActions.DeleteSneakerSuccess(payload))),
       catchError((err: HttpErrorResponse) => dispatch(new sneakersActions.DeleteSneakerFail(err)))
     );
   }
@@ -140,7 +140,7 @@ export class SneakersState {
     { payload }: sneakersActions.DeleteSneaker
   ): Observable<void | SneakerDTO | Observable<void>> {
     return from(this.sneakerService.premiumSneaker(payload)).pipe(
-      map((_) => dispatch(new sneakersActions.PremiumSneakerSuccess(payload))),
+      map(() => dispatch(new sneakersActions.PremiumSneakerSuccess(payload))),
       catchError((err: HttpErrorResponse) => dispatch(new sneakersActions.PremiumSneakerFail(err)))
     );
   }
