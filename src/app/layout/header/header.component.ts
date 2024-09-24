@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 
 @Component({
@@ -15,7 +16,11 @@ export class HeaderComponent implements OnInit {
   ];
   isCollapsed = true;
 
-  constructor(private keycloakService: KeycloakService) {}
+  constructor(private keycloakService: KeycloakService, private router: Router) {}
+
+  navigateHome(): void {
+    this.router.navigate(['/']);
+  }
 
   ngOnInit(): void {
     this.isUserLoggedIn();

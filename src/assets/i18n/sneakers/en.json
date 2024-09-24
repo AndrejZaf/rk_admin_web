@@ -1,0 +1,17 @@
+{
+  "uploadSneakerImages": "Upload Sneaker Images",
+  "sneakers": "Sneakers",
+  "availableSneakers": "Available Sneakers",
+  "addSneaker": "Add Sneaker",
+  "submit": "Submit",
+  "close": "Close",
+  "quantity": "Quantity",
+  "size": "Size",
+  "price": "Price",
+  "description": "Description",
+  "name": "Name",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "brand": "Brand"
+}

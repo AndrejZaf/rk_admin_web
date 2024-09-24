@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
   <div class="container">
-    <a class="navbar-brand col-lg-2 me-0 fw-semibold text-uppercase" href="#">Rare Kickz</a>
+    <div class="navbar-brand col-lg-2 me-0 fw-semibold text-uppercase logo" (click)="navigateHome()">
+      <img width="150" alt="Rare Kickz Logo" src="../../../assets/rk-long-logo.svg" />
+    </div>
     <button
       class="navbar-toggler"
       type="button"
@@ -30,7 +32,7 @@
             class="btn btn-outline-charcoal text-uppercase"
             routerLinkActive="active"
             (click)="logout()">
-            Log Out
+            {{ 'logOut' | translate }}
           </button>
         </div>
       </div>
@@ -39,7 +41,7 @@
       <div ngbDropdown class="d-inline-block">
         <i class="bi bi-person-circle cart-icon" ngbDropdownToggle></i>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem (click)="logout()">Log Out</button>
+          <button ngbDropdownItem (click)="logout()">{{ 'logOut' | translate }}</button>
         </div>
       </div>
     </div>

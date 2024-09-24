@@ -10,9 +10,11 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -28,6 +30,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     });
 }
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/app/', '.json');
+}
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, ContentLayoutComponent],
   imports: [
@@ -40,6 +46,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule,
     NgbModule,
     NgxsModule.forRoot([]),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      isolate: true,
+      defaultLanguage: 'en',
+    }),
   ],
   providers: [
     {

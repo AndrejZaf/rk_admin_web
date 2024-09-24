@@ -7,6 +7,14 @@
   font-size: 25px;
 }
 
+.logo {
+  cursor: pointer;
+}
+
+.custom-badge {
+  background-color: #36454f !important;
+}
+
 .dropdown-toggle::after {
   content: unset;
 }
@@ -18,4 +26,14 @@
 
 .dropdown-menu {
   border-radius: 0%;
+}
+
+.header-logo {
+  width: 70%;
+}
+
+@media screen and (max-width: 768px) {
+  .header-logo {
+    width: 40%;
+  }
 }

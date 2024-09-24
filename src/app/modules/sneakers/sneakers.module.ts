@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { SneakersRoutingModule } from './sneakers-routing.module';
 import { SneakersComponent } from './containers/sneakers/sneakers.component';
@@ -11,6 +11,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SneakerService } from './services/sneaker.service';
 import { NgxsModule } from '@ngxs/store';
 import { SneakersState } from './store/sneakers.store';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/sneakers/', '.json');
+}
 
 @NgModule({
   declarations: [SneakersComponent, SneakerModalComponent],
@@ -22,6 +28,15 @@ import { SneakersState } from './store/sneakers.store';
     SneakersRoutingModule,
     DragDropModule,
     NgxsModule.forFeature([SneakersState]),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'en',
+      isolate: true,
+    }),
   ],
   providers: [SneakerService],
 })
