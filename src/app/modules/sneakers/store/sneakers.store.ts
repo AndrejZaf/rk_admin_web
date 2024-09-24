@@ -8,6 +8,7 @@ import { Observable, catchError, from, map } from 'rxjs';
 import { BrandDTO } from './../dto/brand.dto';
 import { HttpErrorResponse } from '@angular/common/http';
 import { insertItem, patch, removeItem, updateItem } from '@ngxs/store/operators';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 export const sneakersState = (): SneakersViewModel => ({
   brands: [],
@@ -31,7 +32,7 @@ export class SneakersState {
     return state.sneakers;
   }
 
-  constructor(private sneakerService: SneakerService) {}
+  constructor(private sneakerService: SneakerService, private toastService: ToastService) {}
 
   @Action(sneakersActions.LoadBrands)
   loadBrands({ dispatch }: StateContext<SneakersViewModel>): Observable<void | BrandDTO[] | Observable<void>> {
@@ -71,7 +72,10 @@ export class SneakersState {
     { payload }: sneakersActions.AddSneaker
   ): Observable<void | SneakerDTO | Observable<void>> {
     return from(this.sneakerService.addSneaker(payload)).pipe(
-      map((data: SneakerDTO) => dispatch(new sneakersActions.AddSneakerSuccess(data))),
+      map((data: SneakerDTO) => {
+        dispatch(new sneakersActions.AddSneakerSuccess(data));
+        this.toastService.show('Sucessfully created a sneaker', '');
+      }),
       catchError((err: HttpErrorResponse) => dispatch(new sneakersActions.AddSneakerFail(err)))
     );
   }
@@ -94,7 +98,10 @@ export class SneakersState {
     { payload }: sneakersActions.EditSneaker
   ): Observable<void | SneakerDTO | Observable<void>> {
     return from(this.sneakerService.editSneaker(payload)).pipe(
-      map((data: SneakerDTO) => dispatch(new sneakersActions.EditSneakerSuccess(data))),
+      map((data: SneakerDTO) => {
+        dispatch(new sneakersActions.EditSneakerSuccess(data));
+        this.toastService.show('Sucessfully editted a sneaker', '');
+      }),
       catchError((err: HttpErrorResponse) => dispatch(new sneakersActions.EditSneakerFail(err)))
     );
   }
